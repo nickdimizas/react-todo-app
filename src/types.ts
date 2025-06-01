@@ -1,14 +1,14 @@
 export type TodoProps = {
   id: number;
   text: string;
-  // completed: boolean;
+  completed: boolean;
 }
 
 export type Action =
     | {type: "ADD"; payload: string}
     | {type: "DELETE"; payload: number}
     | {type: "EDIT"; payload: {id: number; newText:string} }
-    // | {type: "COMPLETE"; payload: number};
+    | {type: "COMPLETE"; payload: number};
 
 export type TodoFormProps = {
   dispatch: React.Dispatch<Action>;
