@@ -13,9 +13,13 @@ export type Action =
 
 export type TodoFormProps = {
   dispatch: React.Dispatch<Action>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
 };
 
 export type TodoListProps = {
   todos: TodoProps[];
-  dispatch: React.Dispatch<Action>
+  dispatch: React.Dispatch<Action>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  editId: number | null;
+  setEditId: React.Dispatch<React.SetStateAction<number | null>>;
 }

@@ -1,9 +1,9 @@
 import {CheckSquare, Edit, Save, Square, Trash2, X} from "lucide-react";
 import type { TodoListProps } from "../types.ts";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
-const TodoList = ({todos, dispatch}: TodoListProps) =>{
-const [editId, setEditId] = useState<number | null>(null);
+const TodoList = ({todos, dispatch, inputRef, editId, setEditId}: TodoListProps) =>{
+// const [editId, setEditId] = useState<number | null>(null);
 const [editText, setEditText] = useState("");
 
 const handleDelete = (id: number) => () => {
@@ -24,11 +24,20 @@ const handleDelete = (id: number) => () => {
     dispatch({type: "EDIT", payload: {id, newText: editText}});
     setEditId(null);
     setEditText("");
+    setTimeout(() => {
+      inputRef.current?.focus(); // Now inputRef should be defined
+    }, 0);
   }
 
   const handleToggle = (id: number) => () => {
     dispatch({type: "COMPLETE", payload: id});
   }
+
+  useEffect(() => {
+    if (editId === null) {
+      inputRef.current?.focus();
+    }
+  }, [editId, inputRef]);
 
   return (
       <>
